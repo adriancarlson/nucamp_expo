@@ -7,6 +7,7 @@ import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, Drawers
 import HomeScreen from './HomeScreen';
 import AboutScreen from './AboutScreen';
 import ContactScreen from './ContactScreen';
+import ReservationScreen from './ReservationScreen';
 import { Icon } from 'react-native-elements';
 import logo from '../assets/images/logo.png';
 import { useDispatch } from 'react-redux';
@@ -53,6 +54,21 @@ const DirectoryNavigator = () => {
 	);
 };
 
+const ReservationNavigator = () => {
+	const Stack = createStackNavigator();
+	return (
+		<Stack.Navigator screenOptions={screenOptions}>
+			<Stack.Screen
+				name='Reservation'
+				component={ReservationScreen}
+				options={({ navigation }) => ({
+					title: 'Reservation Search',
+					headerLeft: () => <Icon name='tree' type='font-awesome' iconStyle={styles.stackIcon} onPress={() => navigation.toggleDrawer()}></Icon>,
+				})}
+			/>
+		</Stack.Navigator>
+	);
+};
 const AboutNavigator = () => {
 	const Stack = createStackNavigator();
 	return (
@@ -120,6 +136,11 @@ const Main = () => {
 					name='Directory'
 					component={DirectoryNavigator}
 					options={{ title: 'Campsite Directory', drawerIcon: ({ color }) => <Icon name='list' type='font-awesome' size={24} iconStyle={{ width: 24 }} color={color}></Icon> }}
+				></Drawer.Screen>
+				<Drawer.Screen
+					name='Reserve Campsite'
+					component={ReservationNavigator}
+					options={{ title: 'Reserve Campsite', drawerIcon: ({ color }) => <Icon name='tree' type='font-awesome' size={24} iconStyle={{ width: 24 }} color={color}></Icon> }}
 				></Drawer.Screen>
 				<Drawer.Screen
 					name='About'
